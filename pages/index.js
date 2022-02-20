@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react"
 import Header from "../components/Header"
-import NavBar from "../components/NavBar"
 
 export default function Home() {
-    const API_KEY = process.env.API_KEY
-
     const [movies, setMovies] = useState();
     useEffect(() => {
         (async () => {
-            const { results } = await (await fetch(
-                `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
-            )
-            ).json()
+            const { results } = await (await fetch(`/api/movies`)).json()
             setMovies(results)
         })()
     }, [])
@@ -26,11 +20,9 @@ export default function Home() {
                 </div>
             ))}
             <h1>hi</h1>
-
+            {console.log('movies', movies)}
             <style jsx global>{`
-                a {
-                    color: white
-                }
+       
             `}</style>
 
         </div>
